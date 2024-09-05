@@ -1,6 +1,7 @@
 package me.calciu.ghiblipicker
 
 import java.io.File
+import java.io.FileNotFoundException
 import java.io.FileWriter
 
 val movieList = mutableListOf(
@@ -72,11 +73,40 @@ fun saveExclusion () {
     }
     catch (e: Exception) {
         println("File saving failed: ${e.message}")
+        Thread.sleep(1000)
+        mainMenu()
+    }
+    finally {
+        println("Saved to save.txt!")
+        Thread.sleep(1000)
+        mainMenu()
     }
 }
-fun loadExclusion () {
-    {}
+fun loadExclusion (): MutableList<Char> {
+    val filePath = "save.txt"
+    try {
+        val file = File(filePath)
+        val content = file.readText()
+        val movieListMod = content.toMutableList()
+    }
+    catch (e: FileNotFoundException) {
+        println("File not found! Try saving first.")
+        Thread.sleep(1000)
+        mainMenu()
+    }
+    catch (e: Exception) {
+        println("File loading failed: ${e.message}")
+        Thread.sleep(1000)
+        mainMenu()
+    }
+    finally {
+        println("Loaded from save.txt!")
+        Thread.sleep(1000)
+        mainMenu()
+    }
+
 }
+
 fun exit() {
     kotlin.system.exitProcess(0)
 }
@@ -110,5 +140,6 @@ fun mainMenu() {
     }
 }
 fun main() {
+    println(loadExclusion())
     mainMenu()
 }
