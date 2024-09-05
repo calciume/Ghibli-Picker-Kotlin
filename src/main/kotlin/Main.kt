@@ -1,5 +1,8 @@
 package me.calciu.ghiblipicker
 
+import java.io.File
+import java.io.FileWriter
+
 val movieList = mutableListOf(
     "Nausicaä of the Valley of the Wind",
     "Castle in the Sky",
@@ -59,6 +62,21 @@ fun excludeMovie() {
         excludeMovie()
     }
 }
+fun saveExclusion () {
+    val movieListString = movieList.toString()
+    try {
+        val file = File("save.txt")
+        val writer = FileWriter("save.txt")
+        writer.write(movieListString)
+        writer.close()
+    }
+    catch (e: Exception) {
+        println("File saving failed: ${e.message}")
+    }
+}
+fun loadExclusion () {
+    {}
+}
 fun exit() {
     kotlin.system.exitProcess(0)
 }
@@ -69,7 +87,9 @@ fun mainMenu() {
     println("-------------------------------------")
     println("1. Pick a movie for me!")
     println("2. Exclude a movie from being picked")
-    println("3. Exit")
+    println("3. Save")
+    println("4. Load")
+    println("5. Exit")
     //Make sure the program doesn't break from invalid user input
     try {
         val getUserInput = readln().toInt()
@@ -77,7 +97,9 @@ fun mainMenu() {
         when (getUserInput) {
             1 -> pickMovie()
             2 -> excludeMovie()
-            3 -> exit()
+            3 -> saveExclusion()
+            4 -> loadExclusion()
+            5 -> exit()
             else -> println("Invalid number!")
         }
     }
