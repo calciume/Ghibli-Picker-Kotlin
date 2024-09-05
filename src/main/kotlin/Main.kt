@@ -3,6 +3,9 @@ package me.calciu.ghiblipicker
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileWriter
+import kotlinx.serialization.*
+import kotlinx.serialization.json.*
+import kotlinx.serialization.json.internal.writeJson
 
 val movieList = mutableListOf(
     "Nausicaä of the Valley of the Wind",
@@ -64,11 +67,12 @@ fun excludeMovie() {
     }
 }
 fun saveExclusion () {
-    val movieListString = movieList.toString()
+    val json = Json {ignoreUnknownKeys = true}
+    val jsonMovieString: String = json.encodeToString(movieList)
     try {
         val file = File("save.txt")
         val writer = FileWriter("save.txt")
-        writer.write(movieListString)
+        writer.write(jsonMovieString)
         writer.close()
     }
     catch (e: Exception) {
@@ -82,7 +86,7 @@ fun saveExclusion () {
         mainMenu()
     }
 }
-fun loadExclusion (): MutableList<Char> {
+fun loadExclusion () {
     val filePath = "save.txt"
     try {
         val file = File(filePath)
@@ -104,7 +108,6 @@ fun loadExclusion (): MutableList<Char> {
         Thread.sleep(1000)
         mainMenu()
     }
-
 }
 
 fun exit() {
@@ -140,6 +143,5 @@ fun mainMenu() {
     }
 }
 fun main() {
-    println(loadExclusion())
     mainMenu()
 }
