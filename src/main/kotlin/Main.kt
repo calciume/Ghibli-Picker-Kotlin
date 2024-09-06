@@ -5,7 +5,6 @@ import java.io.FileNotFoundException
 import java.io.FileWriter
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
-import kotlinx.serialization.json.internal.writeJson
 
 val movieList = mutableListOf(
     "Nausicaä of the Valley of the Wind",
@@ -67,11 +66,13 @@ fun excludeMovie() {
     }
 }
 fun saveExclusion () {
-    val json = Json {ignoreUnknownKeys = true}
+    val json = Json {
+        ignoreUnknownKeys = true
+    }
     val jsonMovieString: String = json.encodeToString(movieList)
     try {
-        val file = File("save.txt")
-        val writer = FileWriter("save.txt")
+        val file = File("save.json")
+        val writer = FileWriter("save.json")
         writer.write(jsonMovieString)
         writer.close()
     }
@@ -81,17 +82,18 @@ fun saveExclusion () {
         mainMenu()
     }
     finally {
-        println("Saved to save.txt!")
+        println("Saved to save.json!")
         Thread.sleep(1000)
         mainMenu()
     }
 }
 fun loadExclusion () {
-    val filePath = "save.txt"
+    val filePath = "save.json"
     try {
         val file = File(filePath)
         val content = file.readText()
-        val movieListMod = content.toMutableList()
+        val json = Json {ignoreUnknownKeys = true}
+        val deserializedJsonMovie = json.decodeFromString<MutableList<String>>(content)
     }
     catch (e: FileNotFoundException) {
         println("File not found! Try saving first.")
@@ -104,7 +106,7 @@ fun loadExclusion () {
         mainMenu()
     }
     finally {
-        println("Loaded from save.txt!")
+        println("Loaded from save.json!")
         Thread.sleep(1000)
         mainMenu()
     }
