@@ -87,7 +87,7 @@ fun saveExclusion () {
         mainMenu()
     }
 }
-fun loadExclusion (): MutableList<String>? {
+fun loadExclusion () {
     val filePath = "save.json"
     try {
         val file = File(filePath)
@@ -114,7 +114,6 @@ fun loadExclusion (): MutableList<String>? {
         Thread.sleep(1000)
         mainMenu()
     }
-    return null
 }
 
 fun exit() {
