@@ -87,13 +87,17 @@ fun saveExclusion () {
         mainMenu()
     }
 }
-fun loadExclusion () {
+fun loadExclusion (): MutableList<String>? {
     val filePath = "save.json"
     try {
         val file = File(filePath)
         val content = file.readText()
         val json = Json {ignoreUnknownKeys = true}
         val deserializedJsonMovie = json.decodeFromString<MutableList<String>>(content)
+        movieList.clear()
+        for (entry in deserializedJsonMovie) {
+            movieList.add(entry)
+        }
     }
     catch (e: FileNotFoundException) {
         println("File not found! Try saving first.")
@@ -110,6 +114,7 @@ fun loadExclusion () {
         Thread.sleep(1000)
         mainMenu()
     }
+    return null
 }
 
 fun exit() {
