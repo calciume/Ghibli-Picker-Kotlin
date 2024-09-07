@@ -122,7 +122,7 @@ fun exit() {
 fun mainMenu() {
     //Fancy way to clear the terminal on *nix OS's.
     print("\u001b[H\u001b[2J")
-    println("Studio Ghibli Picker v0.2.0 by calciume")
+    println("Studio Ghibli Picker v0.2.1 by calciume")
     println("-------------------------------------")
     println("1. Pick a movie for me!")
     println("2. Exclude a movie from being picked")
