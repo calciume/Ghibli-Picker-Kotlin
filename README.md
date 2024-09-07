@@ -5,7 +5,7 @@ I wrote this same program in [Python](https://github.com/calciume/Ghibli-Picker)
 As someone who is still basically a total beginner in programming writing this was actually quite tough because I actually had to work with scopes, I couldn't just make global variables any time I am inconvenienced by scopes. 
 
 **How to run**
-1. `git clone https://github.com/calciume/Ghibli-Picker-Kotlin`
+1. `git clone https://github.com/calciume/Ghibli-Picker-Kotlin.git`
 2. `cd Ghibli-Picker-Kotlin`
-3. `kotlinc src/main/kotlin/Main.kt -include-runtime -d Ghibli-Picker-Kotlin.jar`
-4. `java -jar Ghibli-Picker-Kotlin.jar`
+3. `./gradlew jar`
+4. `java -jar build/lib/<press Tab>`
