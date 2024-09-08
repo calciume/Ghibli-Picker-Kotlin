@@ -6,33 +6,8 @@ import java.io.FileWriter
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
-val movieList = mutableListOf(
-    "Nausicaä of the Valley of the Wind",
-    "Castle in the Sky",
-    "My Neighbor Totoro",
-    "Grave of the Fireflies",
-    "Kiki's Delivery Service",
-    "Only Yesterday",
-    "Porco Rosso",
-    "Ocean Waves",
-    "Pom Poko",
-    "Whisper of the Heart",
-    "Princess Mononoke",
-    "My Neighbors the Yamadas",
-    "Spirited Away",
-    "The Cat Returns",
-    "Howl\'s Moving Castle",
-    "Tales from Earthsea",
-    "Ponyo",
-    "Arrietty",
-    "From Up on Poppy Hill",
-    "The Wind Rises",
-    "The Tale of the Princess Kaguya",
-    "When Marnie Was There",
-    "The Red Turtle",
-    "Earwig and the Witch",
-    "The Boy and the Heron",
-)
+val movieList: MutableList<String> = mutableListOf()
+
 fun pickMovie() {
     val movieListObjectCount = movieList.size - 1
     val randomMovieNum = (0..movieListObjectCount).random()
@@ -49,10 +24,10 @@ fun excludeMovie() {
         println(movie)
     }
     println("Enter the number of the movie you would like to exclude")
-    println("Enter \"Exit\" to return to menu.")
+    println("Enter \"exit\" to return to menu.")
     try {
         val getUserInput = readln()
-        if (getUserInput == "Exit") {
+        if (getUserInput == "exit") {
             mainMenu()
         }
         movieList.removeAt(getUserInput.toInt())
@@ -91,8 +66,8 @@ fun saveExclusion () {
         mainMenu()
     }
 }
-fun loadExclusion () {
-    val filePath = "save.json"
+fun loadJsonFile(filePathIn: String) {
+    val filePath = filePathIn
     try {
         val file = File(filePath)
         val content = file.readText()
@@ -114,7 +89,7 @@ fun loadExclusion () {
         mainMenu()
     }
     finally {
-        println("Loaded from save.json!")
+        println("Loaded from ${filePath}!")
         Thread.sleep(1000)
         mainMenu()
     }
@@ -126,7 +101,7 @@ fun exit() {
 fun mainMenu() {
     //Fancy way to clear the terminal on *nix OS's.
     print("\u001b[H\u001b[2J")
-    println("Studio Ghibli Picker v0.2.1 by calciume")
+    println("Studio Ghibli Picker v0.3.0 by calciume")
     println("-------------------------------------")
     println("1. Pick a movie for me!")
     println("2. Exclude a movie from being picked")
@@ -141,7 +116,7 @@ fun mainMenu() {
             1 -> pickMovie()
             2 -> excludeMovie()
             3 -> saveExclusion()
-            4 -> loadExclusion()
+            4 -> loadJsonFile("save.json")
             5 -> exit()
             else -> println("Invalid number!")
         }
@@ -153,5 +128,5 @@ fun mainMenu() {
     }
 }
 fun main() {
-    mainMenu()
+    loadJsonFile("list.json")
 }

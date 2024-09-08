@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "me.calciu"
-version = "0.2.1"
+version = "0.3.0"
 tasks.jar {
     manifest.attributes["Main-Class"] = "me.calciu.ghiblipicker.MainKt"
     val dependencies = configurations
