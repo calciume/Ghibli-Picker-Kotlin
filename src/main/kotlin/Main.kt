@@ -49,10 +49,14 @@ fun excludeMovie() {
         println(movie)
     }
     println("Enter the number of the movie you would like to exclude")
+    println("Enter \"Exit\" to return to menu.")
     try {
-        val getUserInput = readln().toInt()
-        movieList.removeAt(getUserInput)
-        mainMenu()
+        val getUserInput = readln()
+        if (getUserInput == "Exit") {
+            mainMenu()
+        }
+        movieList.removeAt(getUserInput.toInt())
+        excludeMovie()
     }
     catch (e: NumberFormatException) {
         println("Invalid Input!")
