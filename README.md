@@ -7,5 +7,5 @@ As someone who is still basically a total beginner in programming writing this w
 **How to run (Unix-like OS's)**
 1. `git clone https://github.com/calciume/Ghibli-Picker-Kotlin`
 2. `cd Ghibli-Picker-Kotlin`
-3. `kotlinc src/main/kotlin/Main.kt -include-runtime -d Ghibli-Picker-Kotlin.jar`
-4. `java -jar Ghibli-Picker-Kotlin.jar`
+3. `./gradlew jar`
+4. `java -jar build/libs/<press tab>`
